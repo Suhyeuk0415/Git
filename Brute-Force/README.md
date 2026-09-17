@@ -39,9 +39,11 @@ hydra -l admin -P pass.txt ssh://192.168.62.130
 
 📸 실습 결과 화면
 Kali Linux (차단되어 멈춘 화면)
-![Kali Linux](https://github.com/user-attachments/assets/53ab08f0-c7cd-4b71-8197-fcb1f61edf5c)
+<img width="751" height="293" alt="image" src="https://github.com/user-attachments/assets/1997d72e-e467-4837-878a-f70aa279dd2d" />
+
 
 
 
 Rocky Linux (로그 도배 화면)
-![Rocky Linux](https://github.com/user-attachments/assets/7b5a9a41-a41c-4b72-b6e1-222ebc33d63a)
+<img width="908" height="408" alt="image" src="https://github.com/user-attachments/assets/67f063de-254a-41a1-a00f-943fa8ca0621" />
+
