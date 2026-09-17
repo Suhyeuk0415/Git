@@ -38,14 +38,13 @@ hydra -l admin -P pass.txt ssh://192.168.62.130
 방화벽 로그 폭주 현상 분석 (TCP Retransmission): 방어 서버의 실시간 로그(tail -f /var/log/messages) 모니터링 중 [SSH_BLOCK] 로그가 화면을 덮을 정도로 대량 발생하는 현상 확인. 이는 방화벽이 패킷을 REJECT(거절)가 아닌 DROP(무시) 처리했기 때문에 발생한 정상적인 현상임. 공격자 측은 서버로부터 응답을 받지 못해 패킷을 지속적으로 재전송(TCP Retransmission)했고, 방화벽은 이 재전송 패킷들까지 모두 차단해 내며 로그를 반복 기록했음을 원리적으로 이해함.
 
 📸 실습 결과 화면
-Kali Linux (차단되어 멈춘 화면)
-<img width="713" height="277" alt="image" src="https://github.com/user-attachments/assets/baa8ff48-da97-4a55-b4c4-b92d6f96f3d8" />
+**Kali Linux (차단되어 멈춘 화면)**
 
+![kali_block](https://github.com/user-attachments/assets/baa8ff48-da97-4a55-b4c4-b92d6f96f3d8)
 
-Rocky Linux (로그 도배 화면)
-<img width="910" height="414" alt="image" src="https://github.com/user-attachments/assets/e534e6ba-afcd-44e6-8e4a-b3eb4ac8e6f0" />
+**Rocky Linux (로그 도배 화면)**
 
-
+![rocky_log](https://github.com/user-attachments/assets/e534e6ba-afcd-44e6-8e4a-b3eb4ac8e6f0)
 
 
 
