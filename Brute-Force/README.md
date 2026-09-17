@@ -1,6 +1,3 @@
-- [SSH Brute Force 방어 실습 (iptables recent 모듈 활용)](./Brute-Force/README.md)
-
-Markdown
 # SSH Brute Force 방어 실습 (iptables recent 모듈 활용)
 
 ## 1. 실습 목적
@@ -30,17 +27,19 @@ Kali Linux에서 5개의 임의 비밀번호가 담긴 사전 파일(pass.txt)�
 Bash
 # 사전 파일(pass.txt)을 이용해 Target으로 SSH 로그인 시도
 hydra -l admin -P pass.txt ssh://192.168.62.130
-5. 실습 결과 및 트러블슈팅
+# 5. 실습 결과 및 트러블슈팅
 공격 테스트 결과, 3번째 로그인 시도까지는 서버가 정상적으로 반응했으나 4번째 시도부터 iptables 임계치 룰이 발동하여 공격자(Kali)의 터미널이 멈추고 통신이 완전히 차단(Timeout)되는 것을 확인함.
 
-💡 트러블슈팅 및 로그 분석 포인트
+트러블슈팅 및 로그 분석 포인트
 
 공격 옵션 실수 해결: 초기에 -p (소문자) 옵션을 사용하여 여러 비밀번호를 입력했을 때, 툴이 이를 1개의 긴 비밀번호로 인식하여 임계치(4회)를 넘지 못하는 문제가 있었음. 이를 -P (대문자) 옵션과 텍스트 사전 파일(pass.txt) 조합으로 수정하여 정상적인 다중 접속 공격 테스트를 구현함.
 
 방화벽 로그 폭주 현상 분석 (TCP Retransmission): 방어 서버의 실시간 로그(tail -f /var/log/messages) 모니터링 중 [SSH_BLOCK] 로그가 화면을 덮을 정도로 대량 발생하는 현상 확인. 이는 방화벽이 패킷을 REJECT(거절)가 아닌 DROP(무시) 처리했기 때문에 발생한 정상적인 현상임. 공격자 측은 서버로부터 응답을 받지 못해 패킷을 지속적으로 재전송(TCP Retransmission)했고, 방화벽은 이 재전송 패킷들까지 모두 차단해 내며 로그를 반복 기록했음을 원리적으로 이해함.
 
-Kali Linux
-<img width="796" height="320" alt="image" src="https://github.com/user-attachments/assets/53ab08f0-c7cd-4b71-8197-fcb1f61edf5c" />
+실습 결과 화면
+Kali Linux (차단되어 멈춘 화면)
+<img width="791" height="313" alt="image" src="https://github.com/user-attachments/assets/3282c98d-886c-47ff-a4bd-6d3058e5b57c" />
 
-Rocky Linux
-<img width="898" height="416" alt="image" src="https://github.com/user-attachments/assets/7b5a9a41-a41c-4b72-b6e1-222ebc33d63a" />
+
+Rocky Linux (로그 도배 화면)
+<img width="917" height="401" alt="image" src="https://github.com/user-attachments/assets/503ec699-83f6-4e9c-8665-38b32bb3acb6" />
