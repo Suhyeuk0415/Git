@@ -33,6 +33,7 @@ ls -l /home/user/vuln_env/find
 
 # SUID 파일 검색 (오류 메시지 제외)
 find / -perm -4000 -type f 2>/dev/null
+
 <img width="548" height="382" alt="image" src="https://github.com/user-attachments/assets/ff0710c3-bc70-4fe9-a763-bc7b75938052" />
 
 
