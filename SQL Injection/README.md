@@ -23,19 +23,19 @@ INSERT INTO users (id, password) VALUES ('admin', 'SuperSecretPassword123!');
 2. 취약한 로그인 페이지(login.php) 구현
 내용: 사용자 입력값에 대한 검증이나 이스케이프 처리가 전혀 없어 SQL Injection에 취약한 로그인 웹 페이지를 Apache 웹 서버 경로(/var/www/html/login.php)에 생성하였습니다.
 
-증명 사진: <img width="546" height="64" alt="image" src="https://github.com/user-attachments/assets/09e163db-d4aa-47ef-8af4-4b7f58f7dc26" />
+증명 사진:<img width="546" height="64" alt="image" src="https://github.com/user-attachments/assets/09e163db-d4aa-47ef-8af4-4b7f58f7dc26" />
 
 
 3. 웹 서비스 접속 확인
 내용: 칼리 리눅스(공격자)의 웹 브라우저를 통해 방어자 서버의 로그인 페이지에 정상적으로 접속되는지 확인하였습니다.
 
-<img width="1030" height="337" alt="image" src="https://github.com/user-attachments/assets/66ff5c43-2bae-411c-8f96-26d10598a826" />
+증명 사진:<img width="1030" height="337" alt="image" src="https://github.com/user-attachments/assets/66ff5c43-2bae-411c-8f96-26d10598a826" />
 
 
 4. SQL Injection 공격 수행 (인증 우회)
 내용: 패스워드를 모르는 상태에서 인증을 우회하기 위해 ID 입력란에 주석 페이로드(admin' #)를 입력하여 뒤쪽의 패스워드 검증 쿼리를 무력화하고 로그인을 시도했습니다.
 
-<img width="980" height="251" alt="image" src="https://github.com/user-attachments/assets/9c533a72-72fc-4619-8367-524f85c04564" />
+증명 사진:<img width="980" height="251" alt="image" src="https://github.com/user-attachments/assets/9c533a72-72fc-4619-8367-524f85c04564" />
 
 
 💻 소스코드 비교 및 보안 분석
